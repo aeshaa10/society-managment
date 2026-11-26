@@ -25,8 +25,16 @@ const allowedOrigins = process.env.CLIENT_URL
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (Postman, mobile)
-      if (!origin || allowedOrigins.includes(origin)) {
+      // Allow requests with no origin (Postman, mobile, curl)
+      if (!origin) return callback(null, true);
+
+      // Allow if origin is explicitly in allowedOrigins OR matches any vercel.app domain
+      const isAllowed =
+        allowedOrigins.includes(origin) ||
+        origin.endsWith('.vercel.app') ||
+        origin.includes('localhost');
+
+      if (isAllowed) {
         callback(null, true);
       } else {
         callback(new Error(`CORS blocked for origin: ${origin}`));
