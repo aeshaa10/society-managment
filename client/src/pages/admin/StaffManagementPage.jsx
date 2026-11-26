@@ -43,7 +43,7 @@ export default function StaffManagementPage() {
     try {
       setLoading(true);
       const res = await authService.getStaff();
-      const data = res.data?.staff || res.data?.data || res.data || [];
+      const data = res.data?.data?.staff || res.data?.staff || res.data?.data || res.data || [];
       setStaff(Array.isArray(data) ? data : []);
     } catch (err) {
       toast.error(err?.response?.data?.message || 'Failed to load staff');

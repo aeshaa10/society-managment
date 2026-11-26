@@ -19,7 +19,7 @@ export default function LoginPage() {
   const [showPass, setShowPass] = useState(false);
   const [authError, setAuthError] = useState('');
 
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({
+  const { register, handleSubmit, setValue, formState: { errors, isSubmitting } } = useForm({
     resolver: zodResolver(schema),
   });
 
@@ -114,12 +114,45 @@ export default function LoginPage() {
 
           {/* Demo credentials */}
           <div className="mt-6 p-4 bg-gray-50 rounded-xl border border-gray-100">
-            <p className="text-xs font-semibold text-gray-600 mb-2">Demo Credentials:</p>
-            <div className="space-y-1 text-xs text-gray-500 font-mono">
-              <p><span className="font-semibold text-blue-900">Admin:</span> admin@sahyog.com / Admin@123</p>
-              <p><span className="font-semibold text-purple-700">Staff:</span> staff1@sahyog.com / Staff@123</p>
-              <p><span className="font-semibold text-emerald-700">Member:</span> member1@sahyog.com / Member@123</p>
+            <p className="text-xs font-semibold text-gray-600 mb-2">Demo Credentials (Click to fill):</p>
+            <div className="space-y-1.5 text-xs text-gray-500 font-mono">
+              <button
+                type="button"
+                onClick={() => {
+                  setValue('email', 'admin@sahyog.com');
+                  setValue('password', 'Admin@123');
+                }}
+                className="w-full text-left p-1.5 rounded hover:bg-blue-50 transition-colors flex items-center justify-between"
+              >
+                <span><strong className="text-blue-900 font-semibold">Admin:</strong> admin@sahyog.com</span>
+                <span className="text-[11px] text-gray-400">Admin@123</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setValue('email', 'staff1@sahyog.com');
+                  setValue('password', 'Staff@123');
+                }}
+                className="w-full text-left p-1.5 rounded hover:bg-purple-50 transition-colors flex items-center justify-between"
+              >
+                <span><strong className="text-purple-700 font-semibold">Staff:</strong> staff1@sahyog.com</span>
+                <span className="text-[11px] text-gray-400">Staff@123</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setValue('email', 'suresh.nair@email.com');
+                  setValue('password', 'Member@123');
+                }}
+                className="w-full text-left p-1.5 rounded hover:bg-emerald-50 transition-colors flex items-center justify-between"
+              >
+                <span><strong className="text-emerald-700 font-semibold">Member:</strong> suresh.nair@email.com</span>
+                <span className="text-[11px] text-gray-400">Member@123</span>
+              </button>
             </div>
+            <p className="mt-2 text-[11px] text-gray-400 text-center font-sans">
+              Note: In credit societies, new members are registered by Admin under "Members → Add Member" (KYC & verification).
+            </p>
           </div>
         </div>
       </div>

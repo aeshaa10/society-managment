@@ -1,8 +1,9 @@
+
 {
   "rewrites": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "source": "/api/:path*",
+      "destination": "https://society-managment-api-zn7c.onrender.com/api/:path*"
     }
   ]
 }
